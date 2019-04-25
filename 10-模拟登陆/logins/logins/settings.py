@@ -52,9 +52,11 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'logins.middlewares.LoginsDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'logins.middlewares.LoginsDownloaderMiddleware': 543,
+    # 放置brower的中间件
+    'brower_cookie.middlewares.BrowerCookiesMiddleware': 701,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html

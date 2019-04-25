@@ -4,7 +4,7 @@ import scrapy
 import pytesseract
 from PIL import Image
 from io import BytesIO
-from scrapy import FormRequest, Request
+from scrapy import Request
 from scrapy.log import logger
 import json
 

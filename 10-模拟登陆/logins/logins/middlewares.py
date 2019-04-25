@@ -4,8 +4,9 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
+import browsercookie
 from scrapy import signals
+from scrapy.downloadermiddlewares.cookies import CookiesMiddleware
 
 
 class LoginsSpiderMiddleware(object):
@@ -101,3 +102,27 @@ class LoginsDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class BrowersCookieMiddleware(CookiesMiddleware):
+    """
+    在构造browercookiesMiddleware对象时，使用browercookie提取浏览器的cookie，存储 到cookiejar字典的self.jars中
+
+    """
+    def __init__(self, debug=False):
+        super().__init__(debug)
+        self.load_brower_cookies()       # 创建对象后  重写父类之后就调用load加载浏览器cookie
+
+    def load_brower_cookies(self):
+        # 从默认字典中获取两个浏览器的cookie 填入各自的cookiejar中
+        jar = self.jars['chrome']
+        chrome_cookiejar = browsercookie.chrome()
+        for cookie in chrome_cookiejar:
+            jar.set_cookie(cookie)
+
+        jar = self.jars['firefox']
+        firefox_brower = browsercookie.firefox()
+        for cookie in firefox_brower:
+            jar.set_cookie(cookie)
+
+
