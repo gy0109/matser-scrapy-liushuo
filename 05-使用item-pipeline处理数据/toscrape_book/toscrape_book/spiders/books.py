@@ -2,6 +2,7 @@ import scrapy
 from scrapy.linkextractors import LinkExtractor
 from ..items import BookItem
 
+
 class BookSpider(scrapy.Spider):
     name = 'books'
     start_urls = ['http://books.toscrape.com/']
