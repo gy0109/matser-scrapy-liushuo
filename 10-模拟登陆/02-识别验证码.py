@@ -6,7 +6,6 @@
 from PIL import Image
 import pytesseract
 
-img = Image.open('./code.png')
+img = Image.open('./code1.png')
 img = img.convert('L')
 print(pytesseract.image_to_string(img))
-
